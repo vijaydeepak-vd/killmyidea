@@ -1,0 +1,105 @@
+{
+  "typography": {
+    "headings": {
+      "family": "Cabinet Grotesk, sans-serif",
+      "strategy": "Swiss Brutalist - sharp, strong, brutally honest. High weight contrast (Black for verdicts, Medium for section headers). Tight tracking.",
+      "classes": "font-bold tracking-tight text-white"
+    },
+    "body": {
+      "family": "Geist, sans-serif",
+      "strategy": "Functional, clean readability for long analytical text.",
+      "classes": "text-muted-foreground leading-relaxed"
+    },
+    "data_and_scores": {
+      "family": "Geist Mono, JetBrains Mono, monospace",
+      "strategy": "Used for all metrics, scores, risk levels, and analytical data to emphasize the 'AI research tool' aesthetic.",
+      "classes": "font-mono uppercase tracking-widest text-sm"
+    }
+  },
+  "colors": {
+    "primary": "#014644",
+    "background": "#060909",
+    "surface": "#0C1212",
+    "surface_hover": "#131C1C",
+    "border": "#1A2626",
+    "muted_text": "#809999",
+    "high_contrast_text": "#FFFFFF",
+    "risk_states": {
+      "green_viable": "#10B981",
+      "amber_uncertain": "#F59E0B",
+      "red_high_risk": "#EF4444"
+    },
+    "strategy": "Dark developer/founder-tool aesthetic. The primary color (#014644) is used for brand accents, active states, and primary CTAs. Backgrounds are deep tinted grays (not pure black). Do not overuse gradients; rely on flat colors and subtle 1px borders."
+  },
+  "visual enhancers": {
+    "borders": "1px crisp borders using the 'Technical Look' pattern. Use `border-white/10` or `#1A2626`.",
+    "shadows": "Very subtle ambient shadows (`shadow-sm`, `shadow-inner`). No glowing neon unless it's a critical alert.",
+    "textures": "Include a subtle noise/grain overlay across the app background to kill digital flatness and enhance the 'research tool' feel.",
+    "glassmorphism": "Avoid glassmorphism globally. Use solid dark surfaces to maintain the serious, brutalist analytical feel. The only exception is the sticky navigation bar, which can have a slight blur (`backdrop-blur-md bg-[#060909]/80`). DO NOT use completely transparent backgrounds."
+  },
+  "component_name": [
+    "Button",
+    "Card",
+    "Progress",
+    "Badge",
+    "Textarea",
+    "Select",
+    "Separator",
+    "ScrollArea"
+  ],
+  "grids": {
+    "dashboard_grid": "Bento Grid Protocol (Mode B: High Density). Base: `grid-cols-1 md:grid-cols-4 lg:grid-cols-12`. Very tight gaps (`gap-4` or `gap-6`).",
+    "factor_analysis_grid": "8-factor grid using `grid-cols-1 md:grid-cols-2 lg:grid-cols-4`. All items must stretch to equal height.",
+    "brutal_reality_section": "List format or 1-column strict vertical stack with red/amber/green dot indicators."
+  },
+  "layouts": {
+    "landing": "Center-aligned hero content with a brutalist typography focus, followed by a 'preview' container showing a mock report.",
+    "input_form": "Max-width centered container (`max-w-2xl`). Clean, minimal, focusing entirely on the idea input.",
+    "results_dashboard": "Max-width container (`max-w-6xl`). Contains a sticky sub-navigation, hero score area, and then structured dense bento grids for the analysis.",
+    "prototype_badge": "Fixed bottom-right unobtrusive badge with text 'Prototype / Demo Analysis' to prevent hallucination concerns."
+  },
+  "motion": {
+    "loading_analysis": "10-stage sequential text animation (e.g., 'Analyzing Market...', 'Checking Competitors...', 'Calculating Viability...'). Fast transitions (2-4s total).",
+    "score_transition": "Animated number counters for the Viability Score (especially in the 'Save The Idea' section where it transitions from 42 to 64).",
+    "interactions": "Fast, subtle micro-interactions on hover. Minimal scaling (`hover:scale-[1.01]`). Use `transition-colors duration-200`."
+  },
+  "accessibility": {
+    "contrast": "Ensure text over primary color #014644 meets APCA standards (usually requires white text).",
+    "focus": "High contrast focus rings. `focus-visible:ring-2 focus-visible:ring-[#014644] focus-visible:ring-offset-2 focus-visible:ring-offset-[#060909]`.",
+    "data_testid": "MANDATORY on all buttons, forms, links, and key result cards."
+  },
+  "media": {
+    "strategy": "No photography required. Rely heavily on typography, shapes, charts, and icons (Phosphor or Lucide)."
+  },
+  "3d_libraries": {
+    "recommendation": "None. Keep the interface 2D, flat, and extremely fast to load, fitting the 'brutal reality' and 'linear' aesthetic."
+  },
+  "image_urls": [],
+  "component_path": "/app/frontend/src/components/ui",
+  "instructions_to_main_agent": [
+    "Build the complete fully working frontend prototype as a single-page app.",
+    "Implement the flow: Landing -> Input Form -> Loading Animation -> Results Dashboard.",
+    "The analysis results MUST BE HARDCODED or mock-generated on the frontend to reflect the 'Demo analysis' requirement. Do not build a real backend AI.",
+    "The scores should explicitly not be 100% positive. Force a 'High Risk' scenario (e.g., Viability Score 42/100).",
+    "Use standard Lucide React icons for the factor cards and risk indicators.",
+    "Build a custom radial score visualization using SVG or Recharts for the main verdict.",
+    "In the 'Can We Save This Idea?' section, implement an interactive button that triggers the simulated score improvement animation.",
+    "Write React components as .jsx/.js files, not .tsx. Do not use TypeScript syntax.",
+    "Ensure GENERAL UI UX DESIGN GUIDELINES are applied across all interactive elements."
+  ],
+  "UNIVERSAL GUIDELINES FOR MAIN AGENT": [
+    "You tend to converge toward generic, 'on distribution' outputs. In frontend design, this creates what users call the 'AI slop' aesthetic. Avoid this: make creative, distinctive frontends that surprise and delight.",
+    "Dark colors look good when used independently without gradients. DO NOT use dark colors as gradients.",
+    "Don't make generic centered layouts, simplistic gradients, and uniform styling.",
+    "Create depth through layered design elements with z-index hierarchy.",
+    "Use glass-morphism effects with backdrop filters ONLY on the sticky nav.",
+    "You MUST NOT apply universal transition. Eg: `transition: all`. Always add transitions for specific interactive elements.",
+    "You MUST NOT center align the app container. Do not add `.App { text-align: center; }` in the css file.",
+    "Always use modern button styles like pill-shaped, or sharp button with interaction animations & color relevant to the app style.",
+    "NEVER: use AI assistant Emoji characters like 🤖🧠💭💡🔮🎯 etc for icons.",
+    "Every interaction needs micro-animations - hover states, transitions, parallax effects, and entrance animations.",
+    "Use 2-3x more spacing than feels comfortable. Cramped designs look cheap.",
+    "Prioritize using pre-existing components from src/components/ui when applicable.",
+    "All interactive and key informational elements MUST include a `data-testid` attribute to facilitate robust automated testing."
+  ]
+}
