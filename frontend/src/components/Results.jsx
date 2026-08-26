@@ -29,6 +29,14 @@ export default function Results({ result, onRestart }) {
     <div className="min-h-screen" data-testid="results-page">
       <ResultsNav onRestart={onRestart} />
       <main className="mx-auto max-w-6xl px-5 pb-32 sm:px-8">
+        {result.source === "fallback-demo" && (
+          <div
+            data-testid="fallback-banner"
+            className="mt-6 rounded-lg border border-uncertain/40 bg-uncertain/10 px-4 py-3 text-sm text-body"
+          >
+            Live AI analysis unavailable. Showing demonstration analysis instead.
+          </div>
+        )}
         <VerdictHero result={result} projected={tested && canSave ? result.save.projected : null} />
 
         <section id="market" className="scroll-mt-20 py-14">

@@ -25,6 +25,14 @@ export default function VerdictHero({ result, projected }) {
         >
           {risk.label}
         </span>
+        {result.sourceLabel && (
+          <span
+            data-testid="analysis-source"
+            className="rounded-full border border-info/40 bg-info/10 px-3 py-1 font-mono text-[10px] uppercase tracking-widest text-info"
+          >
+            {result.sourceLabel}
+          </span>
+        )}
         {projected != null && (
           <span
             data-testid="projected-chip"

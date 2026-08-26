@@ -15,7 +15,7 @@ const STAGES = [
   "Searching for reasons this could fail",
 ];
 
-export default function AnalysisProgress({ idea, onDone }) {
+export default function AnalysisProgress({ idea, mode = "demo", holding = false, onDone }) {
   const [idx, setIdx] = useState(0);
   const doneRef = useRef(onDone);
   doneRef.current = onDone;
@@ -73,6 +73,16 @@ export default function AnalysisProgress({ idea, onDone }) {
           })}
         </div>
 
+        {holding && (
+          <div
+            className="mt-2 flex items-center gap-3 rounded-md px-3 py-2.5 text-body"
+            data-testid="analysis-holding"
+          >
+            <Loader2 size={15} className="shrink-0 animate-spin text-teal" />
+            <span className="font-mono text-sm">Consulting Gemma 4 31B Cloud…</span>
+          </div>
+        )}
+
         <div className="mt-8 h-1 overflow-hidden rounded-full bg-raise">
           <div
             className="h-full rounded-full bg-brand transition-[width] duration-300"
@@ -81,7 +91,9 @@ export default function AnalysisProgress({ idea, onDone }) {
           />
         </div>
         <p className="mt-4 font-mono text-[10px] uppercase tracking-widest text-mist/60">
-          Simulated analysis — no live research
+          {mode === "live"
+            ? "AI analysis — research engine not connected"
+            : "Simulated analysis — no live research"}
         </p>
       </div>
     </div>

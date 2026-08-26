@@ -26,7 +26,7 @@ export default function IdeaForm({ onBack, onAnalyze }) {
   const [showDemos, setShowDemos] = useState(false);
 
   const update = (key, value) => {
-    setForm((f) => ({ ...f, [key]: value }));
+    setForm((f) => ({ ...f, [key]: value, demoId: undefined }));
     setErrors((e) => ({ ...e, [key]: undefined }));
   };
 
@@ -89,7 +89,7 @@ export default function IdeaForm({ onBack, onAnalyze }) {
                 <button
                   key={demo.id}
                   onClick={() => {
-                    setForm(demo.form);
+                    setForm({ ...demo.form, demoId: demo.id });
                     setErrors({});
                     setShowDemos(false);
                   }}

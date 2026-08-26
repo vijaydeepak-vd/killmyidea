@@ -49,6 +49,16 @@ Build a fully working, polished **frontend-only prototype** called **KillMyIdea*
 - `branddark` token is theme-aware (--brand-strong): #012E2C in light, #F3F7F7 in dark (heading contrast).
 - Verified: system-preference first visit, toggle, reload persistence, keyboard toggling, full analysis flow in dark (landing, input, animation, results, risks, evidence, save, verdict), mobile dark (390px), zero console errors.
 
+## Ollama Cloud + Gemma 4 31B integration (2026-07-04)
+- Provider abstraction: `backend/ollama_provider.py` (OllamaCloudProvider — OpenAI-compatible `https://ollama.com/v1/chat/completions`, one call per analysis, 90s read timeout, no retries, never logs key/idea) ← `backend/analysis_service.py` (system prompt with brutal-honesty philosophy, JSON extraction incl. markdown-fence stripping, Pydantic validation, improvement sanitizer) ← `POST /api/analyze` in `server.py`. Pydantic schemas in `backend/analysis_models.py` (verdict enum DON'T KILL IT/NOT YET/KILL IT, 8 factors with score/riskLevel/explanation/reasoning/confidence, brutalReality, evidence, improvement, improvementAvailable, projectedViabilityScore).
+- Env config: OLLAMA_API_KEY / OLLAMA_BASE_URL / OLLAMA_MODEL=gemma4:31b-cloud in backend/.env (server-side only).
+- Frontend `src/data/analysisService.js`: posts to /api/analyze, maps + validates response into existing UI shape, falls back to the local deterministic engine on ANY failure (network, 503, invalid JSON, missing fields) with banner "Live AI analysis unavailable. Showing demonstration analysis instead." Live results carry the chip "AI Analysis — Research Engine Not Connected".
+- Demo ideas + "See Example Analysis" intentionally stay on the deterministic engine (reliable demos); custom free-text ideas go to live AI.
+- AnalysisProgress holds on "Consulting Gemma 4 31B Cloud…" until the model responds; mode-aware footer label.
+- NEW per task QA: Verdict History (localStorage `kmi-history`, max 8, reopen past results, clear; section on landing) and Score Breakdown "Why this score?" expandable reasoning+confidence on every factor card.
+- Motion layer (framer-motion + lenis): masked line-by-line hero reveal, staggered hero entrance, slow editorial marquee, numbered manifesto chapters with scroll-reveals, subtle parallax on the report preview, lenis momentum scrolling.
+- Tested: service unit paths (malformed→fallback, fenced JSON→parsed, worse projection→improvement disabled, missing field→fallback), provider connection failure→503, e2e browser flow incl. fallback banner, factor panels, history persistence across reload, demo determinism, dark theme. KNOWN ISSUE: the user-provided OLLAMA_API_KEY returns 401 Unauthorized from ollama.com — live path verified end-to-end up to provider auth; needs a valid key.
+
 ## Backlog / remaining
 - P1: Replace mock engine with real AI + live market research backend (architecture is isolated in `src/data/analysis.js` for swap-in).
 - P1: Shareable analysis report link (requires backend + persistence).

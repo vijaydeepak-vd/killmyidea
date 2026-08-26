@@ -574,8 +574,16 @@ export function analyzeIdea(form) {
   else if (text.includes("figma")) result = figmaResult();
   else result = generatedResult(form);
 
+  const factors = result.factors.map((f) => ({
+    riskLevel: factorLevel(f.score).label,
+    reasoning: [f.text],
+    confidence: "Medium",
+    ...f,
+  }));
+
   return {
     ...result,
+    factors,
     form,
     analyzedAt: new Date().toISOString(),
   };

@@ -1,5 +1,6 @@
-from fastapi import FastAPI, APIRouter
+from fastapi import FastAPI, APIRouter, HTTPException
 from dotenv import load_dotenv
+from analysis_service import analyze_with_ai
 from starlette.middleware.cors import CORSMiddleware
 from motor.motor_asyncio import AsyncIOMotorClient
 import os
@@ -65,6 +66,27 @@ async def get_status_checks():
             check['timestamp'] = datetime.fromisoformat(check['timestamp'])
     
     return status_checks
+
+class AnalyzeRequest(BaseModel):
+    idea: str = Field(min_length=10, max_length=4000)
+    target: str = Field(min_length=2, max_length=500)
+    monetization: str = Field(default="Subscription", max_length=100)
+    differentiation: str = Field(min_length=5, max_length=2000)
+    problem: str = Field(default="", max_length=2000)
+
+
+@api_router.post("/analyze")
+async def analyze_idea_endpoint(req: AnalyzeRequest):
+    analysis = await analyze_with_ai(req.model_dump())
+    if analysis is None:
+        raise HTTPException(status_code=503, detail="ai_analysis_unavailable")
+    return {
+        "source": "ollama-cloud",
+        "model": os.environ.get("OLLAMA_MODEL", ""),
+        "label": "AI Analysis — Research Engine Not Connected",
+        "analysis": analysis.model_dump(),
+    }
+
 
 # Include the router in the main app
 app.include_router(api_router)
