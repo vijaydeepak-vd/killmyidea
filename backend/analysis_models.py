@@ -19,6 +19,7 @@ class BrutalItem(BaseModel):
     severity: Literal["critical", "moderate", "positive"] = "moderate"
     title: str = Field(min_length=1)
     detail: str = Field(min_length=1)
+    sourceUrl: Optional[str] = None
 
 
 class EvidenceItem(BaseModel):
@@ -26,6 +27,7 @@ class EvidenceItem(BaseModel):
     level: str = Field(min_length=1)
     strength: str = "Insufficient evidence"
     points: List[str] = Field(default_factory=list)
+    sourceUrl: Optional[str] = None
 
 
 class Improvement(BaseModel):
@@ -54,3 +56,6 @@ class IdeaAnalysis(BaseModel):
     improvement: Improvement = Field(default_factory=Improvement)
     improvementAvailable: bool
     projectedViabilityScore: Optional[int] = Field(default=None, ge=0, le=100)
+    solutionCoverage: Optional[
+        Literal["Mostly unsolved", "Partially solved", "Well solved", "Commoditized"]
+    ] = None

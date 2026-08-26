@@ -15,6 +15,8 @@ const FACTOR_META = [
 
 const CONFIDENCE_PCT = { high: 85, medium: 70, low: 50 };
 const SEVERITY_TONE = { critical: "red", moderate: "amber", positive: "green" };
+const VALID_URL = /^https?:\/\//i;
+const CONF_LEVELS = ["HIGH", "MEDIUM", "LOW", "UNKNOWN"];
 
 const clampScore = (v) => {
   const n = Number(v);
@@ -32,9 +34,43 @@ const levelTone = (level) => {
   return "amber";
 };
 
-// Maps the validated AI response into the exact shape the results UI renders.
+const validUrl = (u) => (u && VALID_URL.test(String(u)) ? String(u) : null);
+
+function mapResearch(raw) {
+  if (!raw || typeof raw !== "object") return null;
+  const status = ["success", "partial", "unavailable"].includes(raw.status)
+    ? raw.status
+    : "unavailable";
+  const c = raw.counts && typeof raw.counts === "object" ? raw.counts : {};
+  const counts = {
+    sourcesAnalyzed: Number(c.sourcesAnalyzed) || 0,
+    competitorsFound: Number(c.competitorsFound) || 0,
+    pricingSources: Number(c.pricingSources) || 0,
+    marketSignals: Number(c.marketSignals) || 0,
+  };
+  const findings = (Array.isArray(raw.findings) ? raw.findings : [])
+    .filter((f) => f && f.claim && validUrl(f.sourceUrl))
+    .slice(0, 16)
+    .map((f) => ({
+      category: String(f.category || "market"),
+      claim: String(f.claim),
+      source: String(f.source || "Source"),
+      sourceUrl: String(f.sourceUrl),
+      evidence: String(f.evidence || ""),
+      confidence: CONF_LEVELS.includes(f.confidence) ? f.confidence : "UNKNOWN",
+    }));
+  return {
+    status,
+    confidence: CONF_LEVELS.includes(raw.confidence) ? raw.confidence : "UNKNOWN",
+    counts,
+    findings,
+  };
+}
+
+// Maps the validated backend response into the exact shape the results UI renders.
 // Throws on anything invalid — the caller falls back to the demo engine.
-function mapAiAnalysis(ai, form, label) {
+function mapAiAnalysis(data, form) {
+  const ai = data && data.analysis;
   if (!ai || typeof ai !== "object") throw new Error("empty analysis");
   const viability = clampScore(ai.overallViabilityScore);
   if (viability === null) throw new Error("invalid overallViabilityScore");
@@ -60,6 +96,7 @@ function mapAiAnalysis(ai, form, label) {
       tone: SEVERITY_TONE[b.severity] || "amber",
       title: String(b.title || "Risk"),
       body: String(b.detail || ""),
+      sourceUrl: validUrl(b.sourceUrl),
     }))
     .filter((f) => f.body);
   if (findings.length < 3) throw new Error("insufficient brutalReality");
@@ -70,6 +107,7 @@ function mapAiAnalysis(ai, form, label) {
     levelTone: levelTone(e.level),
     strength: String(e.strength || "Insufficient evidence"),
     points: asStrings(e.points),
+    sourceUrl: validUrl(e.sourceUrl),
   }));
 
   const projected = clampScore(ai.projectedViabilityScore);
@@ -111,7 +149,12 @@ function mapAiAnalysis(ai, form, label) {
     },
     analyzedAt: new Date().toISOString(),
     source: "ollama-cloud",
-    sourceLabel: label || "AI Analysis — Research Engine Not Connected",
+    sourceLabel: data.label || "AI Analysis — Research Unavailable",
+    researchStatus: ["success", "partial", "unavailable"].includes(data.researchStatus)
+      ? data.researchStatus
+      : "unavailable",
+    research: mapResearch(data.research),
+    solutionCoverage: ai.solutionCoverage || null,
   };
 }
 
@@ -135,7 +178,7 @@ export async function analyzeIdeaLive(form) {
     clearTimeout(timer);
     if (!res.ok) throw new Error(`provider_${res.status}`);
     const data = await res.json();
-    return mapAiAnalysis(data.analysis, form, data.label);
+    return mapAiAnalysis(data, form);
   } catch {
     return { ...analyzeIdea(form), source: "fallback-demo", sourceLabel: "Demo analysis" };
   }

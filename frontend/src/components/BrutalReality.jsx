@@ -1,3 +1,4 @@
+import { ExternalLink } from "lucide-react";
 import SectionHeading from "@/components/SectionHeading";
 import { TONE } from "@/components/tones";
 
@@ -18,6 +19,18 @@ export default function BrutalReality({ findings }) {
                 {f.title}
               </h3>
               <p className="mt-1 text-sm leading-relaxed text-mist">{f.body}</p>
+              {f.sourceUrl && (
+                <a
+                  href={f.sourceUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  data-testid={`brutal-evidence-link-${i}`}
+                  className="mt-2 inline-flex items-center gap-1.5 font-mono text-[10px] uppercase tracking-widest text-info transition-colors duration-200 hover:underline"
+                >
+                  Evidence-backed
+                  <ExternalLink size={11} />
+                </a>
+              )}
             </div>
           </div>
         ))}

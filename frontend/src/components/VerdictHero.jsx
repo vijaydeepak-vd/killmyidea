@@ -30,7 +30,11 @@ export default function VerdictHero({ result, projected }) {
             data-testid="analysis-source"
             className={`rounded-full border px-3 py-1 font-mono text-[10px] uppercase tracking-widest ${
               result.source === "ollama-cloud"
-                ? "border-info/40 bg-info/10 text-info"
+                ? result.researchStatus === "success"
+                  ? "border-viable/40 bg-viable/10 text-viable"
+                  : result.researchStatus === "partial"
+                    ? "border-uncertain/40 bg-uncertain/10 text-uncertain"
+                    : "border-info/40 bg-info/10 text-info"
                 : "border-uncertain/40 bg-uncertain/10 text-uncertain"
             }`}
           >

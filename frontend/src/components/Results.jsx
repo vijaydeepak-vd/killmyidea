@@ -8,6 +8,7 @@ import EvidenceCard from "@/components/EvidenceCard";
 import SaveIdea from "@/components/SaveIdea";
 import FinalVerdict from "@/components/FinalVerdict";
 import SectionHeading from "@/components/SectionHeading";
+import ResearchFindings from "@/components/ResearchFindings";
 import { verdictFor, stepsFor } from "@/data/analysis";
 
 const MARKET_KEYS = ["problem", "market", "monetization", "execution"];
@@ -81,10 +82,19 @@ export default function Results({ result, onRestart }) {
           >
             <Info size={16} className="mt-0.5 shrink-0 text-info" />
             <p className="text-sm leading-relaxed text-mist">
-              This prototype uses curated demonstration evidence. The production version would
-              connect this layer to live market research.
+              {result.research && result.research.status !== "unavailable"
+                ? "Research evidence below comes from live web sources gathered for this analysis. The AI assessment is kept separate."
+                : result.source === "ollama-cloud"
+                  ? "AI reasoning only — live research is unavailable. Evidence below is model inference, not web research."
+                  : "This prototype uses curated demonstration evidence. The production version would connect this layer to live market research."}
             </p>
           </div>
+          <ResearchFindings research={result.research} solutionCoverage={result.solutionCoverage} />
+          {result.research && result.research.status !== "unavailable" && (
+            <p className="mb-3 font-mono text-[10px] uppercase tracking-widest text-mist">
+              Analyst assessment
+            </p>
+          )}
           <div className="space-y-3">
             {result.evidence.map((item, i) => (
               <EvidenceCard key={item.title} item={item} index={i} defaultOpen={i === 0} />

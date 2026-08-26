@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { ChevronDown, Minus } from "lucide-react";
+import { ChevronDown, ExternalLink, Minus } from "lucide-react";
 import { TONE } from "@/components/tones";
 
 export default function EvidenceCard({ item, index, defaultOpen }) {
@@ -48,6 +48,18 @@ export default function EvidenceCard({ item, index, defaultOpen }) {
               </li>
             ))}
           </ul>
+          {item.sourceUrl && (
+            <a
+              href={item.sourceUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              data-testid={`evidence-source-${index}`}
+              className="mt-4 inline-flex items-center gap-1.5 font-mono text-[10px] uppercase tracking-widest text-info transition-colors duration-200 hover:underline"
+            >
+              Source
+              <ExternalLink size={11} />
+            </a>
+          )}
         </div>
       )}
     </div>
