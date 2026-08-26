@@ -29,7 +29,7 @@ export default function ResultsNav({ onRestart }) {
           <div className="flex h-6 w-6 items-center justify-center rounded bg-brand">
             <Skull size={12} className="text-white" />
           </div>
-          <span className="hidden font-mono text-xs font-semibold uppercase tracking-widest text-white md:inline">
+          <span className="hidden font-mono text-xs font-semibold uppercase tracking-widest text-body md:inline">
             KillMyIdea
           </span>
         </button>
@@ -39,7 +39,7 @@ export default function ResultsNav({ onRestart }) {
               key={id}
               onClick={() => scrollTo(id)}
               data-testid={`nav-link-${id}`}
-              className="whitespace-nowrap rounded px-2.5 py-1.5 font-mono text-[11px] uppercase tracking-wider text-mist transition-colors duration-200 hover:bg-raise hover:text-white"
+              className="whitespace-nowrap rounded px-2.5 py-1.5 font-mono text-[11px] uppercase tracking-wider text-mist transition-colors duration-200 hover:bg-raise hover:text-body"
             >
               {label}
             </button>
@@ -48,7 +48,7 @@ export default function ResultsNav({ onRestart }) {
         <button
           onClick={onRestart}
           data-testid="nav-new-analysis"
-          className="hidden shrink-0 rounded-md border border-line px-3 py-1.5 font-mono text-[11px] uppercase tracking-wider text-mist transition-colors duration-200 hover:border-[#2a403c] hover:text-white sm:block"
+          className="hidden shrink-0 rounded-md border border-line px-3 py-1.5 font-mono text-[11px] uppercase tracking-wider text-mist transition-colors duration-200 hover:border-brand/40 hover:text-body sm:block"
         >
           New Analysis
         </button>

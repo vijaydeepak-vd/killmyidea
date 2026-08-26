@@ -38,7 +38,7 @@ export default function AnalysisProgress({ idea, onDone }) {
           <div className="flex h-8 w-8 items-center justify-center rounded-md bg-brand">
             <Skull size={16} className="text-white" />
           </div>
-          <span className="font-display text-lg font-bold tracking-tight text-white">
+          <span className="font-display text-lg font-bold tracking-tight text-body">
             KillMyIdea
           </span>
         </div>
@@ -57,7 +57,7 @@ export default function AnalysisProgress({ idea, onDone }) {
                 key={stage}
                 data-testid={`analysis-stage-${i}`}
                 className={`flex items-center gap-3 rounded-md px-3 py-2.5 transition-colors duration-200 ${
-                  active ? "bg-surface text-white" : done ? "text-white/80" : "text-mist/50"
+                  active ? "bg-brandlight text-body" : done ? "text-body/80" : "text-mist/50"
                 }`}
               >
                 {done ? (

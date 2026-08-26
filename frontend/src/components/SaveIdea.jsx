@@ -33,10 +33,10 @@ export default function SaveIdea({ result, tested, onTest }) {
           sub="We only show a change if it materially improves the odds."
         />
         <div className="rounded-xl border border-risk/30 bg-surface p-6 sm:p-10" data-testid="no-improvement">
-          <h3 className="font-display text-xl font-bold text-white sm:text-2xl">
+          <h3 className="font-display text-xl font-bold text-body sm:text-2xl">
             No meaningful improvement found.
           </h3>
-          <blockquote className="mt-4 max-w-2xl border-l-2 border-risk pl-4 leading-relaxed text-white/85">
+          <blockquote className="mt-4 max-w-2xl border-l-2 border-risk pl-4 leading-relaxed text-body/85">
             {save.explanation}
           </blockquote>
           <p className="mt-6 font-mono text-sm uppercase tracking-widest">
@@ -64,14 +64,14 @@ export default function SaveIdea({ result, tested, onTest }) {
         <div className="grid gap-10 lg:grid-cols-2">
           <div>
             <p className={eyebrowClass}>Current</p>
-            <p className="mt-2 font-mono text-4xl font-semibold text-white">
+            <p className="mt-2 font-mono text-4xl font-semibold text-body">
               {result.viability}
               <span className="text-lg text-mist"> / 100</span>
             </p>
             <p className={`mt-8 ${eyebrowClass}`}>Recommended change</p>
             <blockquote
               data-testid="save-change"
-              className="mt-3 border-l-2 border-brand pl-4 leading-relaxed text-white/90"
+              className="mt-3 border-l-2 border-brand pl-4 leading-relaxed text-body/90"
             >
               {save.change}
             </blockquote>
@@ -79,7 +79,7 @@ export default function SaveIdea({ result, tested, onTest }) {
           </div>
           <div className="lg:border-l lg:border-line lg:pl-10">
             <p className={eyebrowClass}>Projected viability</p>
-            <p className="mt-2 font-mono text-4xl font-semibold text-white" data-testid="projected-score">
+            <p className="mt-2 font-mono text-4xl font-semibold text-body" data-testid="projected-score">
               {tested ? (
                 <>
                   {display}
@@ -93,7 +93,7 @@ export default function SaveIdea({ result, tested, onTest }) {
             </p>
             <ul className="mt-6 space-y-2.5">
               {save.reasons.map((reason) => (
-                <li key={reason} className="flex items-center gap-2.5 text-sm text-white/85">
+                <li key={reason} className="flex items-center gap-2.5 text-sm text-body/85">
                   <Check size={14} className="shrink-0 text-teal" />
                   {reason}
                 </li>

@@ -5,7 +5,7 @@ import { TONE, eyebrowClass } from "@/components/tones";
 const Stat = ({ label, value, testid }) => (
   <div className="px-4 py-4 sm:px-5">
     <p className="font-mono text-[10px] uppercase tracking-widest text-mist">{label}</p>
-    <p className="mt-1 font-mono text-lg font-semibold text-white sm:text-xl" data-testid={testid}>
+    <p className="mt-1 font-mono text-lg font-semibold text-body sm:text-xl" data-testid={testid}>
       {value}
     </p>
   </div>
@@ -42,7 +42,7 @@ export default function VerdictHero({ result, projected }) {
             <p className="font-mono text-[11px] uppercase tracking-widest text-mist">
               Viability score
             </p>
-            <p className="mt-1 font-display text-3xl font-extrabold tracking-tight text-white">
+            <p className="mt-1 font-display text-3xl font-extrabold tracking-tight text-body">
               {result.viability} / 100
             </p>
             <p className={`mt-1 font-mono text-xs uppercase tracking-widest ${tone.text}`}>
@@ -54,7 +54,7 @@ export default function VerdictHero({ result, projected }) {
         <div>
           <blockquote
             data-testid="verdict-quote"
-            className="max-w-2xl border-l-2 border-brand pl-5 text-base leading-relaxed text-white/90 md:text-lg"
+            className="max-w-2xl border-l-2 border-brand pl-5 text-base leading-relaxed text-body/90 md:text-lg"
           >
             “{result.quote}”
           </blockquote>

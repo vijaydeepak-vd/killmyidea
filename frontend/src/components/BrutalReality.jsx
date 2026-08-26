@@ -14,7 +14,7 @@ export default function BrutalReality({ findings }) {
           <div key={i} className="flex gap-4 p-5 sm:p-6" data-testid={`brutal-finding-${i}`}>
             <span className={`mt-1.5 h-2.5 w-2.5 shrink-0 rounded-full ${TONE[f.tone].dot}`} />
             <div>
-              <h3 className="font-display text-base font-semibold text-white sm:text-lg">
+              <h3 className="font-display text-base font-semibold text-body sm:text-lg">
                 {f.title}
               </h3>
               <p className="mt-1 text-sm leading-relaxed text-mist">{f.body}</p>

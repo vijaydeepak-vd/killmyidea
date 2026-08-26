@@ -25,7 +25,7 @@ export default function App() {
   const runExample = useCallback(() => startAnalysis(EXAMPLE_FORM), [startAnalysis]);
 
   return (
-    <div className="min-h-screen bg-ink font-sans text-white">
+    <div className="min-h-screen bg-ink font-sans text-body">
       {view === "landing" && <Landing onStart={() => go("input")} onExample={runExample} />}
       {view === "input" && <IdeaForm onBack={() => go("landing")} onAnalyze={startAnalysis} />}
       {view === "analyzing" && result && (

@@ -18,7 +18,7 @@ export default function FinalVerdict({ score, verdict, steps, changed, onRestart
             {verdict.label}
           </span>
         </div>
-        <p className="mt-5 font-mono text-lg text-white" data-testid="final-verdict-score">
+        <p className="mt-5 font-mono text-lg text-body" data-testid="final-verdict-score">
           Viability: {score}/100
         </p>
         <p className="mt-2 max-w-2xl text-base leading-relaxed text-mist md:text-lg">
@@ -34,7 +34,7 @@ export default function FinalVerdict({ score, verdict, steps, changed, onRestart
           <p className={eyebrowClass}>What should you do next?</p>
           <ol className="mt-4 space-y-3">
             {steps.map((step, i) => (
-              <li key={i} className="flex gap-4 text-sm text-white/85 sm:text-base">
+              <li key={i} className="flex gap-4 text-sm text-body/85 sm:text-base">
                 <span className="shrink-0 font-mono text-mist">{String(i + 1).padStart(2, "0")}</span>
                 <span>{step}</span>
               </li>

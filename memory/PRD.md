@@ -32,8 +32,15 @@ Build a fully working, polished **frontend-only prototype** called **KillMyIdea*
 - All 5 curated scenarios + deterministic generator for free-text ideas.
 - Form validation with brutal error copy; demo ideas panel; back navigation; start-new-analysis.
 - Animated radial score, animated 42→64-style projected score transition, verdict recolor on change.
-- Dark brand theme (#014644), Cabinet Grotesk/Geist fonts, grain overlay, sticky blurred results nav.
+- Sticky blurred results nav, Cabinet Grotesk/Geist fonts.
 - Verified via scripted browser runs: validation errors, demo fill, animation, results, evidence toggles, save-test, all three verdict paths.
+
+## Design system update (2026-07-04)
+- Moved from dark theme to the finalized LIGHT design system. No functional/logic/route/state changes; pure restyle of existing components via Tailwind token remap + targeted class edits.
+- Brand: primary #014644 (CTAs, active states, progress), dark #012E2C (hero/strong headings, CTA hover), light #EAF7F6 (callouts: evidence note, active analysis stage).
+- Neutrals: background #FFFFFF, primary text #111827, secondary text #6B7280, borders #E5E7EB, surfaces #F3F4F6.
+- Semantic (status-only): success #15803D (DON'T KILL IT), warning #B45309 (NOT YET/moderate), danger #B91C1C (KILL IT/high risk), info #2563EB (evidence badges/notes).
+- Removed grain overlay; light scrollbars; brand focus rings; verified desktop (1920), tablet (834), mobile (390) reflow and full flow post-restyle.
 
 ## Backlog / remaining
 - P1: Replace mock engine with real AI + live market research backend (architecture is isolated in `src/data/analysis.js` for swap-in).

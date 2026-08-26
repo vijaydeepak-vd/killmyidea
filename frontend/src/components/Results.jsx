@@ -68,10 +68,10 @@ export default function Results({ result, onRestart }) {
             sub="Every conclusion carries its evidence. Expand to inspect."
           />
           <div
-            className="mb-6 flex gap-3 rounded-lg border border-line bg-surface p-4"
+            className="mb-6 flex gap-3 rounded-lg border border-brand/20 bg-brandlight p-4"
             data-testid="evidence-note"
           >
-            <Info size={16} className="mt-0.5 shrink-0 text-teal" />
+            <Info size={16} className="mt-0.5 shrink-0 text-info" />
             <p className="text-sm leading-relaxed text-mist">
               This prototype uses curated demonstration evidence. The production version would
               connect this layer to live market research.

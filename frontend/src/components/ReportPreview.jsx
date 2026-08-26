@@ -24,7 +24,7 @@ export default function ReportPreview() {
           <p className="font-mono text-[11px] uppercase tracking-widest text-mist">
             Viability score
           </p>
-          <p className="mt-1 font-mono text-5xl font-semibold text-white">
+          <p className="mt-1 font-mono text-5xl font-semibold text-body">
             42<span className="text-lg text-mist">/100</span>
           </p>
           <span className="mt-3 inline-block rounded-full border border-risk/40 bg-risk/10 px-3 py-1 font-mono text-[10px] uppercase tracking-widest text-risk">
@@ -35,7 +35,7 @@ export default function ReportPreview() {
           {ROWS.map((row) => (
             <div key={row.label}>
               <div className="mb-1.5 flex items-center justify-between">
-                <span className="text-sm text-white/85">{row.label}</span>
+                <span className="text-sm text-body/85">{row.label}</span>
                 <span className="font-mono text-xs text-mist">{row.value}/100</span>
               </div>
               <div className="h-1.5 overflow-hidden rounded-full bg-raise">
@@ -47,7 +47,7 @@ export default function ReportPreview() {
       </div>
       <div className="border-t border-line px-6 py-5 sm:px-8">
         <p className="font-mono text-[10px] uppercase tracking-widest text-mist">Brutal verdict</p>
-        <p className="mt-2 text-sm leading-relaxed text-white/85">
+        <p className="mt-2 text-sm leading-relaxed text-body/85">
           “The problem appears real, but the current positioning faces strong competition and does not
           provide enough differentiation to justify switching from existing solutions.”
         </p>

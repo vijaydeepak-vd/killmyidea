@@ -15,7 +15,7 @@ const MODELS = ["Subscription", "One-time purchase", "Usage-based", "Marketplace
 const EMPTY = { idea: "", target: "", monetization: "Subscription", differentiation: "", problem: "" };
 
 const fieldClass =
-  "w-full rounded-md border border-line bg-surface px-4 py-3 text-sm text-white placeholder:text-[#455754] transition-colors duration-200 focus:border-[#2a4a45] focus:outline-none";
+  "w-full rounded-md border border-line bg-surface px-4 py-3 text-sm text-body placeholder:text-[#9CA3AF] transition-colors duration-200 focus:border-brand focus:outline-none";
 
 const labelClass = "mb-2 block font-mono text-[11px] uppercase tracking-widest text-mist";
 
@@ -47,7 +47,7 @@ export default function IdeaForm({ onBack, onAnalyze }) {
           <button
             onClick={onBack}
             data-testid="back-to-landing"
-            className="inline-flex items-center gap-2 font-mono text-xs uppercase tracking-widest text-mist transition-colors duration-200 hover:text-white"
+            className="inline-flex items-center gap-2 font-mono text-xs uppercase tracking-widest text-mist transition-colors duration-200 hover:text-body"
           >
             <ArrowLeft size={14} />
             Back
@@ -56,7 +56,7 @@ export default function IdeaForm({ onBack, onAnalyze }) {
             <div className="flex h-7 w-7 items-center justify-center rounded-md bg-brand">
               <Skull size={14} className="text-white" />
             </div>
-            <span className="font-display text-base font-bold tracking-tight text-white">
+            <span className="font-display text-base font-bold tracking-tight text-body">
               KillMyIdea
             </span>
           </div>
@@ -65,7 +65,7 @@ export default function IdeaForm({ onBack, onAnalyze }) {
 
       <main className="mx-auto max-w-2xl px-5 pb-32 pt-14 sm:px-8">
         <p className={eyebrowClass}>Step 01 — Describe the target</p>
-        <h1 className="mt-3 font-display text-3xl font-bold tracking-tight text-white sm:text-4xl">
+        <h1 className="mt-3 font-display text-3xl font-bold tracking-tight text-branddark sm:text-4xl">
           What are we trying to kill?
         </h1>
         <p className="mt-3 text-base leading-relaxed text-mist">
@@ -76,7 +76,7 @@ export default function IdeaForm({ onBack, onAnalyze }) {
           <button
             onClick={() => setShowDemos((s) => !s)}
             data-testid="demo-ideas-toggle"
-            className="inline-flex items-center gap-2 rounded-md border border-line px-4 py-2 font-mono text-xs uppercase tracking-widest text-mist transition-colors duration-200 hover:border-[#2a403c] hover:text-white"
+            className="inline-flex items-center gap-2 rounded-md border border-line px-4 py-2 font-mono text-xs uppercase tracking-widest text-mist transition-colors duration-200 hover:border-brand/40 hover:text-body"
           >
             <Lightbulb size={14} />
             Demo Ideas
@@ -92,9 +92,9 @@ export default function IdeaForm({ onBack, onAnalyze }) {
                     setShowDemos(false);
                   }}
                   data-testid={`demo-idea-${demo.id}`}
-                  className="rounded-lg border border-line bg-surface p-4 text-left transition-colors duration-200 hover:border-[#2a403c] hover:bg-raise"
+                  className="rounded-lg border border-line bg-surface p-4 text-left transition-colors duration-200 hover:border-brand/40 hover:bg-raise"
                 >
-                  <p className="font-display text-sm font-semibold text-white">{demo.label}</p>
+                  <p className="font-display text-sm font-semibold text-body">{demo.label}</p>
                   <p className="mt-1 text-xs leading-relaxed text-mist">{demo.form.idea}</p>
                 </button>
               ))}
@@ -148,7 +148,7 @@ export default function IdeaForm({ onBack, onAnalyze }) {
             <Select value={form.monetization} onValueChange={(v) => update("monetization", v)}>
               <SelectTrigger
                 data-testid="monetization-select"
-                className="w-full border-line bg-surface px-4 py-3 text-sm text-white focus:ring-0 focus:ring-offset-0"
+                className="w-full border-line bg-surface px-4 py-3 text-sm text-body focus:ring-0 focus:ring-offset-0"
               >
                 <SelectValue placeholder="Select a model" />
               </SelectTrigger>
@@ -158,7 +158,7 @@ export default function IdeaForm({ onBack, onAnalyze }) {
                     key={m}
                     value={m}
                     data-testid={`monetization-option-${m.toLowerCase().replace(/[^a-z]/g, "-")}`}
-                    className="text-sm text-white/85 focus:bg-raise focus:text-white"
+                    className="text-sm text-body/85 focus:bg-raise focus:text-body"
                   >
                     {m}
                   </SelectItem>

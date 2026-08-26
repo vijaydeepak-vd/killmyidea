@@ -32,7 +32,7 @@ export default function Landing({ onStart, onExample }) {
             <div className="flex h-8 w-8 items-center justify-center rounded-md bg-brand">
               <Skull size={17} className="text-white" />
             </div>
-            <span className="font-display text-lg font-bold tracking-tight text-white">
+            <span className="font-display text-lg font-bold tracking-tight text-body">
               KillMyIdea
             </span>
           </div>
@@ -54,7 +54,7 @@ export default function Landing({ onStart, onExample }) {
       <main>
         <section className="mx-auto max-w-4xl px-5 pb-16 pt-24 text-center sm:px-8 sm:pt-32">
           <p className={eyebrowClass}>Brutal feasibility analysis</p>
-          <h1 className="mt-5 font-display text-4xl font-extrabold leading-[1.05] tracking-tight text-white sm:text-5xl lg:text-6xl">
+          <h1 className="mt-5 font-display text-4xl font-extrabold leading-[1.05] tracking-tight text-branddark sm:text-5xl lg:text-6xl">
             Try to kill your idea <span className="text-teal">before the market does.</span>
           </h1>
           <p className="mx-auto mt-6 max-w-2xl text-base leading-relaxed text-mist md:text-lg">
@@ -89,7 +89,7 @@ export default function Landing({ onStart, onExample }) {
                     <step.icon size={16} />
                   </span>
                 </div>
-                <h3 className="mt-4 font-display text-lg font-semibold text-white">{step.title}</h3>
+                <h3 className="mt-4 font-display text-lg font-semibold text-body">{step.title}</h3>
                 <p className="mt-2 text-sm leading-relaxed text-mist">{step.text}</p>
               </div>
             ))}

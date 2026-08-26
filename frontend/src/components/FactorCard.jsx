@@ -30,7 +30,7 @@ export default function FactorCard({ factor }) {
   return (
     <div
       data-testid={`factor-card-${factor.key}`}
-      className="flex flex-col gap-4 rounded-lg border border-line bg-surface p-5 transition-colors duration-200 hover:border-[#2a403c]"
+      className="flex flex-col gap-4 rounded-lg border border-line bg-surface p-5 transition-colors duration-200 hover:border-brand/40"
     >
       <div className="flex items-center justify-between">
         <span className="flex h-9 w-9 items-center justify-center rounded-md border border-line bg-raise text-mist">
@@ -43,11 +43,11 @@ export default function FactorCard({ factor }) {
         </span>
       </div>
       <div>
-        <p className="font-mono text-3xl font-semibold text-white">
+        <p className="font-mono text-3xl font-semibold text-body">
           {factor.score}
           <span className="text-sm text-mist">/100</span>
         </p>
-        <h3 className="mt-1 font-display text-base font-semibold text-white">{factor.name}</h3>
+        <h3 className="mt-1 font-display text-base font-semibold text-body">{factor.name}</h3>
       </div>
       <div className="h-1 overflow-hidden rounded-full bg-raise">
         <div className={`h-full rounded-full ${tone.bar}`} style={{ width: `${factor.score}%` }} />
