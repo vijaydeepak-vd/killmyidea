@@ -1,5 +1,6 @@
 import { ArrowRight, Skull, Crosshair, FileSearch, ShieldAlert } from "lucide-react";
 import ReportPreview from "@/components/ReportPreview";
+import ThemeToggle from "@/components/ThemeToggle";
 import { eyebrowClass, primaryBtnClass, secondaryBtnClass } from "@/components/tones";
 
 const STEPS = [
@@ -40,6 +41,7 @@ export default function Landing({ onStart, onExample }) {
             <span className="hidden rounded-full border border-line px-3 py-1.5 font-mono text-[10px] uppercase tracking-widest text-mist sm:inline-block">
               Prototype
             </span>
+            <ThemeToggle />
             <button
               onClick={onStart}
               data-testid="header-cta"

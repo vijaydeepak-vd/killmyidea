@@ -42,6 +42,13 @@ Build a fully working, polished **frontend-only prototype** called **KillMyIdea*
 - Semantic (status-only): success #15803D (DON'T KILL IT), warning #B45309 (NOT YET/moderate), danger #B91C1C (KILL IT/high risk), info #2563EB (evidence badges/notes).
 - Removed grain overlay; light scrollbars; brand focus rings; verified desktop (1920), tablet (834), mobile (390) reflow and full flow post-restyle.
 
+## Light/Dark theme system (2026-07-04)
+- Centralized CSS-variable design tokens in `index.css` (`--bg`, `--surface`, `--surface-2`, `--line`, `--text-1/2/3`, `--brand-light`, `--brand-accent`, `--brand-strong`, `--success/--warning/--danger/--info`); `.dark` class on `<html>` switches all values. Tailwind custom colors reference these vars (rgb triplet + `<alpha-value>` pattern) — no hardcoded theme colors in components.
+- Dark palette: bg #071918 / surface #0D2423 / elevated #12302F / text #F3F7F7·#9CAFAE·#6B8583 / border #1D4140 / brand-light surface #0A5C58; brand #014644 and hover #012E2C constant in both themes; semantics #22C55E/#F59E0B/#EF4444/#3B82F6 in both themes.
+- `ThemeToggle.jsx` (Sun/Moon, aria-label, aria-pressed, keyboard-accessible) in Landing header, IdeaForm header, and ResultsNav. localStorage key `kmi-theme`; first visit follows `prefers-color-scheme`; inline FOUC-blocking script in `public/index.html` applies the class before render.
+- `branddark` token is theme-aware (--brand-strong): #012E2C in light, #F3F7F7 in dark (heading contrast).
+- Verified: system-preference first visit, toggle, reload persistence, keyboard toggling, full analysis flow in dark (landing, input, animation, results, risks, evidence, save, verdict), mobile dark (390px), zero console errors.
+
 ## Backlog / remaining
 - P1: Replace mock engine with real AI + live market research backend (architecture is isolated in `src/data/analysis.js` for swap-in).
 - P1: Shareable analysis report link (requires backend + persistence).

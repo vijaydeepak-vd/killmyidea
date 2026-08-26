@@ -23,7 +23,7 @@ export default function ScoreRadial({ score, tone, size = 176, testid = "score-r
   return (
     <div className="relative shrink-0" style={{ width: size, height: size }} data-testid={testid}>
       <svg width={size} height={size} viewBox="0 0 180 180">
-        <circle cx="90" cy="90" r={r} fill="none" stroke="#E5E7EB" strokeWidth="10" />
+        <circle cx="90" cy="90" r={r} fill="none" strokeWidth="10" className="stroke-line" />
         <circle
           cx="90"
           cy="90"

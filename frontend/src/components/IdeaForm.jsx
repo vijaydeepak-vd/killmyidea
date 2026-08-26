@@ -2,6 +2,7 @@ import { useState } from "react";
 import { ArrowLeft, ArrowRight, Skull, Lightbulb } from "lucide-react";
 import { DEMO_IDEAS } from "@/data/demoIdeas";
 import { eyebrowClass } from "@/components/tones";
+import ThemeToggle from "@/components/ThemeToggle";
 import {
   Select,
   SelectContent,
@@ -15,7 +16,7 @@ const MODELS = ["Subscription", "One-time purchase", "Usage-based", "Marketplace
 const EMPTY = { idea: "", target: "", monetization: "Subscription", differentiation: "", problem: "" };
 
 const fieldClass =
-  "w-full rounded-md border border-line bg-surface px-4 py-3 text-sm text-body placeholder:text-[#9CA3AF] transition-colors duration-200 focus:border-brand focus:outline-none";
+  "w-full rounded-md border border-line bg-surface px-4 py-3 text-sm text-body placeholder:text-faint transition-colors duration-200 focus:border-brand focus:outline-none";
 
 const labelClass = "mb-2 block font-mono text-[11px] uppercase tracking-widest text-mist";
 
@@ -59,6 +60,7 @@ export default function IdeaForm({ onBack, onAnalyze }) {
             <span className="font-display text-base font-bold tracking-tight text-body">
               KillMyIdea
             </span>
+            <ThemeToggle />
           </div>
         </div>
       </header>

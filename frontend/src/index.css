@@ -24,6 +24,54 @@
         --input: 220 13% 91%;
         --ring: 178 97% 14%;
         --radius: 0.5rem;
+        /* KillMyIdea tokens (light) */
+        --bg: 255 255 255;
+        --surface: 255 255 255;
+        --surface-2: 248 250 250;
+        --line: 229 231 235;
+        --text-1: 17 24 39;
+        --text-2: 107 114 128;
+        --text-3: 107 114 128;
+        --brand-light: 234 247 246;
+        --brand-accent: 1 70 68;
+        --brand-strong: 1 46 44;
+        --success: 34 197 94;
+        --warning: 245 158 11;
+        --danger: 239 68 68;
+        --info: 59 130 246;
+    }
+
+    .dark {
+        --background: 177 56% 6%;
+        --foreground: 180 20% 96%;
+        --card: 177 47% 10%;
+        --card-foreground: 180 20% 96%;
+        --popover: 177 47% 10%;
+        --popover-foreground: 180 20% 96%;
+        --primary: 178 97% 14%;
+        --primary-foreground: 0 0% 100%;
+        --secondary: 178 45% 13%;
+        --secondary-foreground: 180 20% 96%;
+        --muted: 178 45% 13%;
+        --muted-foreground: 177 11% 65%;
+        --accent: 177 80% 20%;
+        --accent-foreground: 180 20% 96%;
+        --destructive: 0 84% 60%;
+        --destructive-foreground: 0 0% 100%;
+        --border: 178 38% 18%;
+        --input: 178 38% 18%;
+        --ring: 172 45% 55%;
+        /* KillMyIdea tokens (dark) */
+        --bg: 7 25 24;
+        --surface: 13 36 35;
+        --surface-2: 18 48 47;
+        --line: 29 65 64;
+        --text-1: 243 247 247;
+        --text-2: 156 175 174;
+        --text-3: 107 133 131;
+        --brand-light: 10 92 88;
+        --brand-accent: 69 184 168;
+        --brand-strong: 243 247 247;
     }
 }
 
@@ -39,13 +87,14 @@
         font-family: "Geist", ui-sans-serif, system-ui, sans-serif;
         -webkit-font-smoothing: antialiased;
         -moz-osx-font-smoothing: grayscale;
+        transition: background-color 0.2s ease, color 0.2s ease;
     }
     ::selection {
         background: #014644;
         color: #ffffff;
     }
     :focus-visible {
-        outline: 2px solid #014644;
+        outline: 2px solid rgb(var(--brand-accent));
         outline-offset: 2px;
     }
     ::-webkit-scrollbar {
@@ -53,14 +102,14 @@
         height: 8px;
     }
     ::-webkit-scrollbar-track {
-        background: #ffffff;
+        background: rgb(var(--bg));
     }
     ::-webkit-scrollbar-thumb {
-        background: #d1d5db;
+        background: rgb(var(--line));
         border-radius: 6px;
     }
     ::-webkit-scrollbar-thumb:hover {
-        background: #9ca3af;
+        background: rgb(var(--text-3));
     }
 }
 

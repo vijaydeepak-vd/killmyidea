@@ -5,7 +5,7 @@ export const TONE = {
     bar: "bg-viable",
     chip: "text-viable border-viable/40 bg-viable/10",
     border: "border-viable/40",
-    stroke: "#10B981",
+    stroke: "#22C55E",
   },
   amber: {
     text: "text-uncertain",
@@ -32,4 +32,4 @@ export const primaryBtnClass =
   "inline-flex items-center justify-center gap-2 rounded-md bg-brand px-6 py-3 font-display text-sm font-semibold tracking-wide text-white transition-colors duration-200 hover:bg-brandhover";
 
 export const secondaryBtnClass =
-  "inline-flex items-center justify-center gap-2 rounded-md border border-[#D1D5DB] bg-white px-6 py-3 font-display text-sm font-semibold tracking-wide text-[#111827] transition-colors duration-200 hover:border-[#9CA3AF] hover:bg-[#F9FAFB]";
+  "inline-flex items-center justify-center gap-2 rounded-md border border-line bg-surface px-6 py-3 font-display text-sm font-semibold tracking-wide text-body transition-colors duration-200 hover:border-mist hover:bg-raise";

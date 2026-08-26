@@ -1,4 +1,5 @@
 import { Skull } from "lucide-react";
+import ThemeToggle from "@/components/ThemeToggle";
 
 const ITEMS = [
   ["overview", "Overview"],
@@ -52,6 +53,7 @@ export default function ResultsNav({ onRestart }) {
         >
           New Analysis
         </button>
+        <ThemeToggle />
       </div>
     </header>
   );
