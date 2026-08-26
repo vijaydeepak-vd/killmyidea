@@ -137,6 +137,6 @@ export async function analyzeIdeaLive(form) {
     const data = await res.json();
     return mapAiAnalysis(data.analysis, form, data.label);
   } catch {
-    return { ...analyzeIdea(form), source: "fallback-demo" };
+    return { ...analyzeIdea(form), source: "fallback-demo", sourceLabel: "Demo analysis" };
   }
 }

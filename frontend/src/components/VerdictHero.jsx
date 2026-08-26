@@ -28,7 +28,11 @@ export default function VerdictHero({ result, projected }) {
         {result.sourceLabel && (
           <span
             data-testid="analysis-source"
-            className="rounded-full border border-info/40 bg-info/10 px-3 py-1 font-mono text-[10px] uppercase tracking-widest text-info"
+            className={`rounded-full border px-3 py-1 font-mono text-[10px] uppercase tracking-widest ${
+              result.source === "ollama-cloud"
+                ? "border-info/40 bg-info/10 text-info"
+                : "border-uncertain/40 bg-uncertain/10 text-uncertain"
+            }`}
           >
             {result.sourceLabel}
           </span>

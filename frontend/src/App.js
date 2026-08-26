@@ -50,7 +50,7 @@ export default function App() {
     setView("analyzing");
     window.scrollTo({ top: 0, behavior: "instant" });
     const run = isDemo
-      ? Promise.resolve({ ...analyzeIdea(form), source: "demo" })
+      ? Promise.resolve({ ...analyzeIdea(form), source: "demo", sourceLabel: "Demo analysis" })
       : analyzeIdeaLive(form);
     run.then((res) => {
       setResult(res);
