@@ -64,6 +64,7 @@ function mapResearch(raw) {
     confidence: CONF_LEVELS.includes(raw.confidence) ? raw.confidence : "UNKNOWN",
     counts,
     findings,
+    gatheredAt: typeof raw.gatheredAt === "string" ? raw.gatheredAt : "",
   };
 }
 

@@ -1,5 +1,6 @@
 import logging
 import os
+import re
 from typing import Optional
 from urllib.parse import urlparse
 
@@ -55,11 +56,14 @@ class TavilySearchProvider:
             log.warning("Search provider request failed: %s", type(exc).__name__)
             return None
 
+        import html as html_lib
+
         results = []
         for item in data.get("results", []):
-            title = str(item.get("title", "")).strip()
+            title = html_lib.unescape(str(item.get("title", ""))).strip()
             url = str(item.get("url", "")).strip()
-            snippet = str(item.get("content", "")).strip()
+            snippet = html_lib.unescape(str(item.get("content", ""))).strip()
+            snippet = re.sub(r"\s+", " ", snippet.replace("Skip to main content", "").replace("Skip to content", "")).strip()
             try:
                 score = float(item.get("score", 0) or 0)
             except (TypeError, ValueError):

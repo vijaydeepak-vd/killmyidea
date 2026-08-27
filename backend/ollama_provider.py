@@ -1,3 +1,4 @@
+import asyncio
 import logging
 import os
 from typing import Optional
@@ -27,22 +28,35 @@ class OllamaCloudProvider:
             "stream": False,
             "temperature": 0.2,
         }
-        try:
-            async with httpx.AsyncClient(
-                timeout=httpx.Timeout(connect=5.0, read=90.0, write=10.0, pool=5.0)
-            ) as client:
-                response = await client.post(
-                    f"{self.base_url}/chat/completions",
-                    headers={
-                        "Authorization": f"Bearer {self.api_key}",
-                        "Content-Type": "application/json",
-                    },
-                    json=payload,
+        for attempt in range(2):
+            try:
+                async with httpx.AsyncClient(
+                    timeout=httpx.Timeout(connect=5.0, read=90.0, write=10.0, pool=5.0)
+                ) as client:
+                    response = await client.post(
+                        f"{self.base_url}/chat/completions",
+                        headers={
+                            "Authorization": f"Bearer {self.api_key}",
+                            "Content-Type": "application/json",
+                        },
+                        json=payload,
+                    )
+                    response.raise_for_status()
+                    body = response.json()
+                    return body["choices"][0]["message"]["content"]
+            except Exception as exc:
+                # Never log the key, headers, or the user's idea.
+                transient = isinstance(exc, (httpx.TimeoutException, httpx.ConnectError)) or (
+                    isinstance(exc, httpx.HTTPStatusError)
+                    and exc.response.status_code in {429, 500, 502, 503, 504}
                 )
-                response.raise_for_status()
-                body = response.json()
-                return body["choices"][0]["message"]["content"]
-        except Exception as exc:
-            # Never log the key, headers, or the user's idea.
-            log.warning("Ollama Cloud request failed: %s", type(exc).__name__)
-            return None
+                log.warning(
+                    "Ollama Cloud request failed: %s (attempt %d, transient=%s)",
+                    type(exc).__name__,
+                    attempt + 1,
+                    transient,
+                )
+                if not transient or attempt == 1:
+                    return None
+                await asyncio.sleep(3)
+        return None

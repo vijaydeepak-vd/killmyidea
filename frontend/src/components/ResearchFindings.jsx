@@ -38,6 +38,11 @@ export default function ResearchFindings({ research, solutionCoverage }) {
           <span className="font-mono text-xs font-semibold text-body">
             Research confidence: {confidence}
           </span>
+          {research.gatheredAt && (
+            <span className="font-mono text-xs text-mist" data-testid="research-gathered-at">
+              Research gathered: {new Date(research.gatheredAt).toLocaleString()}
+            </span>
+          )}
           {solutionCoverage && (
             <span className="font-mono text-xs text-mist">Existing solutions: {solutionCoverage}</span>
           )}

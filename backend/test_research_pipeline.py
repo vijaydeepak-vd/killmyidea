@@ -3,6 +3,10 @@ import sys
 
 sys.path.insert(0, "/app/backend")
 
+from dotenv import load_dotenv
+
+load_dotenv("/app/backend/.env")
+
 from analysis_service import analyze_with_ai, build_user_prompt
 from research_engine import ResearchEngine
 

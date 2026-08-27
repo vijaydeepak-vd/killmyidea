@@ -2,6 +2,7 @@ import asyncio
 import hashlib
 import logging
 import re
+from datetime import datetime, timezone
 from typing import List, Literal, Optional
 from urllib.parse import urlparse
 
@@ -36,6 +37,9 @@ class EvidencePack(BaseModel):
     confidence: Literal["HIGH", "MEDIUM", "LOW", "UNKNOWN"] = "UNKNOWN"
     counts: ResearchCounts = Field(default_factory=ResearchCounts)
     findings: List[Finding] = Field(default_factory=list)
+    gatheredAt: str = Field(
+        default_factory=lambda: datetime.now(timezone.utc).isoformat()
+    )
 
     def to_prompt_text(self) -> str:
         if not self.findings:
@@ -77,9 +81,19 @@ async def _fetch_excerpt(url: str) -> Optional[dict]:
             resp = await client.get(url)
             if resp.status_code != 200 or "text/html" not in resp.headers.get("content-type", ""):
                 return None
-            html = resp.text[:300000]
-            text = re.sub(r"<(script|style)[^>]*>.*?</\1>", " ", html, flags=re.S | re.I)
+            raw = resp.text[:300000]
+            import html as html_lib
+
+            text = re.sub(
+                r"<(script|style|nav|header|footer|form|iframe|noscript|svg)[^>]*>.*?</\1>",
+                " ",
+                raw,
+                flags=re.S | re.I,
+            )
+            text = re.sub(r"<!--.*?-->", " ", text, flags=re.S)
             text = re.sub(r"<[^>]+>", " ", text)
+            text = html_lib.unescape(text)
+            text = text.replace("Skip to main content", " ").replace("Skip to content", " ")
             text = re.sub(r"\s+", " ", text).strip()
             return {"excerpt": text[:1500]}
     except Exception:
