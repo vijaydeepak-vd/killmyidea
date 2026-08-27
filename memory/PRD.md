@@ -77,6 +77,7 @@ Build a fully working, polished **frontend-only prototype** called **KillMyIdea*
 - P2: More curated scenarios and deeper per-industry evidence packs.
 
 ## Next tasks
+0. Secrets audit done (2026-07-04): real keys exist only in untracked backend/.env; git history clean; .gitignore covers .env/.env.*/*.env with .env.example exception; backend/.env.example committed with placeholders; no git remote configured, repo not public. If the repo is ever published: rotate the Ollama + Tavily keys anyway as hygiene (they were shared in chat).
 1. Wire a real analysis endpoint behind the same `analyzeIdea` interface.
 2. Add report export/sharing once persistence exists.
 3. Mobile fine-tuning pass on results density.
