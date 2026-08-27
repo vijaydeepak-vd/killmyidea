@@ -78,6 +78,7 @@ Build a fully working, polished **frontend-only prototype** called **KillMyIdea*
 
 ## Next tasks
 0. Secrets audit done (2026-07-04): real keys exist only in untracked backend/.env; git history clean; .gitignore covers .env/.env.*/*.env with .env.example exception; backend/.env.example committed with placeholders; no git remote configured, repo not public. If the repo is ever published: rotate the Ollama + Tavily keys anyway as hygiene (they were shared in chat).
+0b. Production hardening pass (2026-07-04): added bounded single retry on transient Ollama failures (429/5xx/timeout, 3s backoff) after observing a real transient provider 503 flip a run to demo fallback; added EvidencePack.gatheredAt with "Research gathered: <timestamp>" in the research summary; cleaned evidence excerpts (HTML entities decoded, nav/boilerplate stripped); made test suites self-contained (backend/test_analysis_service.py 5 tests, backend/test_research_pipeline.py) — all pass. Verified: live research, evidence timestamps, safe external links, save flow, verdict history, light/dark, mobile, zero console errors. Frontend has no secrets and no console.log leakage.
 1. Wire a real analysis endpoint behind the same `analyzeIdea` interface.
 2. Add report export/sharing once persistence exists.
 3. Mobile fine-tuning pass on results density.
